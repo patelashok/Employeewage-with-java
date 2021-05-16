@@ -1,39 +1,60 @@
 public class EmpWageBuilder{
-	//CONSTANTS 
-	public static final int EMPLOYEE_WAGE_PER_HOUR=20;
-	public static final int IS_PART_TIME=1;
-	public static final int IS_FULL_TIME=2;
-	public static final int NUMBER_OF_WORKING_DAYS=20;
-	public static final int MAX_WORKING_HOUR=100;
-	public static final int MAX_WORKING_DAYS=20;
 
-	public static void main (String[] args){
-		//VARIABLES
-		int empHrs=0;
-		int empWage=0;
-		int totalEmpWage=0;
-		int totalWorkingDays=0;
-		int totalEmpHrs=0;
+    /**
+     * Put the while loop inside a method.
+     * This while loop will iterate till working days is 20 and Total working hrs is 100.
+     * calculate the monthly wage of Employee.
+     */
+	/**
+	 * Created a method having these parameters through which it will calculate.
+	 *  company
+	 *  empRatePerHr
+	 *  numOfWorkingDays
+	 *  maxHoursPerMonth
+	 */
+	static void calculateTotalwage(String company, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth) {
+		int partTimeEmpHr=4;
+		int fullTimeEmpHrs = 8;
+	    	int empWage=0,totalMonthlyWage=0;
+		int totalWorkingHrs=0,totalWorkingDays=0;
+        	while (totalWorkingDays < numOfWorkingDays && totalWorkingHrs < maxHoursPerMonth) {
+            		int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            			switch (empCheck) {
 
-		//COMPUTATION
-		while(totalEmpHrs<MAX_WORKING_HOUR && totalWorkingDays<MAX_WORKING_DAYS){
-			totalWorkingDays++;	
-			int empCheck=((int)Math.floor(Math.random() *10))% 3;
-		
-			switch(empCheck){
-				case IS_FULL_TIME:
-					empHrs=8;
-					break;
-				case IS_PART_TIME:
-					empHrs=4;
-					break;
-				default:
-					empHrs=0;
-			}
-				totalEmpHrs += empHrs;
-				empWage=empHrs * EMPLOYEE_WAGE_PER_HOUR;
-				totalEmpWage += empWage;
+                			case 0:
+                    				System.out.println("Employee is absent");
+                    				break;
+
+                			case 1:
+                    				System.out.println("Employee is Present");
+                    				empWage = Math.multiplyExact(fullTimeEmpHrs, empRatePerHr);
+                    				System.out.println("Employee Daily Wage is :" + empWage);
+                    				totalWorkingHrs = totalWorkingHrs + 8;
+                    				totalWorkingDays = totalWorkingDays++;
+                    				break;
+                			case 2:
+                    				System.out.println("Employee is Present but Half-Time");
+	                   			empWage = Math.multiplyExact(partTimeEmpHr, empRatePerHr);
+        				        System.out.println("Employee's Part-Time Wage is :" + empWage);
+                    				totalWorkingHrs = totalWorkingHrs + 4;
+                    				totalWorkingDays = totalWorkingDays++;
+                    				break;
+            				}
+            				totalMonthlyWage = totalMonthlyWage + empWage;
+        			}
+        
+        			System.out.println("Company name: "+company);
+        			System.out.println("Employee Monthly Wage is :" + totalMonthlyWage);
+        
+   			}
+   
+    /**
+     * Here this method will take the parameters as input.
+     */
+    			public static void main(String [] args) {
+       			System.out.println("Welcome To Employee wage Computation Program");
+			calculateTotalwage("DMart", 20, 20, 100);
+			calculateTotalwage("Reliance", 30, 15, 150);
 		}
-		System.out.println("Employee Wage Month: "+totalEmpWage);
-		}
-}
+
+	}
